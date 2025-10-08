@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CarCollection.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarCollection.Data
@@ -8,6 +9,10 @@ namespace CarCollection.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
+        public DbSet<CarModel> CarModels { get; set; }
+        public DbSet<CarBrand> CarBrands { get; set; }
     }
+
 }
