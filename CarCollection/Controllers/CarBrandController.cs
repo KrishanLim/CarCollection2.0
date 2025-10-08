@@ -3,6 +3,7 @@ using CarCollection.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace CarCollection.Controllers
 {
     public class CarBrandController : Controller
