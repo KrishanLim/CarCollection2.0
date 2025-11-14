@@ -37,7 +37,6 @@ This account is automatically added when the app runs (see `SeedData.cs`).
 
 3. Add your Google OAuth keys to `appsettings.json`:
 
-```json
 "Authentication": {
   "Google": {
     "ClientId": "<your-client-id>",
