@@ -1,4 +1,6 @@
-﻿@model IEnumerable<CarCollection.Models.CarBrand>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model IEnumerable<CarCollection.Models.CarBrand>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,11 +8,14 @@
 
 <h1>Index</h1>
 
+@if (SignInManager.IsSignedIn(User))
+{
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+}
 <table class="table">
-    <thead>
+        <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -36,10 +41,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FoundedYear)
             </td>
+                
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CarBrandId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CarBrandId">Details</a> |
+                    @if (SignInManager.IsSignedIn(User))
+               {
+                   <a asp-action="Edit" asp-route-id="@item.CarBrandId">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.CarBrandId">Details</a> 
                 <a asp-action="Delete" asp-route-id="@item.CarBrandId">Delete</a>
+               }
             </td>
         </tr>
 }

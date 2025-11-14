@@ -2,6 +2,7 @@
 using CarCollection.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace CarCollection.Controllers
@@ -15,12 +16,14 @@ namespace CarCollection.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var models = _context.CarModels.Include(m => m.CarBrand).ToList();
             return View(models);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             ViewBag.Brands = _context.CarBrands.ToList();
@@ -28,6 +31,7 @@ namespace CarCollection.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(CarModel model)
         {
             if (!ModelState.IsValid)
@@ -41,6 +45,7 @@ namespace CarCollection.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
         public IActionResult Edit(int id)
         {
             var model = _context.CarModels.Find(id);
@@ -53,6 +58,7 @@ namespace CarCollection.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(int id, CarModel model)
         {
             if (!ModelState.IsValid)
@@ -66,6 +72,7 @@ namespace CarCollection.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
         public IActionResult Delete(int id)
         {
             var model = _context.CarModels.Find(id);
